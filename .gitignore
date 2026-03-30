@@ -1,0 +1,30 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Playwright artifacts
+test-results/
+playwright-report/
+playwright/.cache/
+*.zip
+*.webm
+*.png
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env / creds
+.env
