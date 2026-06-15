@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../../pages/LoginPage';
+
 
 //const { test, expect } = require('@playwright/test');
 const { ProductsPage } = require('../../pages/ProductsPage');
 const { CartPage } = require('../../pages/CartPage');
 
-
+test.describe('GreenKart application  @positiveSce @regression', () => {
 test('Add to cart product for GreenKart @smoke', async ({ page }) => {
   await page.goto('https://rahulshettyacademy.com/seleniumPractise/#/');
   await page.getByRole('link', { name: '+' }).first().click();
@@ -88,8 +90,8 @@ test('Add to cart product for GreenKart @smoke', async ({ page }) => {
 });
 
 
-test.describe('GreenKart application  @positiveSce @regression', () => {
-test.only('Add to cart product for GreenKart @regression @smoke', async ({ page }) => {
+
+test('Add to cart product for GreenKart @regression @smoke', async ({ page }) => {
   await page.goto('https://rahulshettyacademy.com/seleniumPractise/#/');
 
   // Use placeholder (stable) instead of role name text
@@ -103,7 +105,7 @@ test.only('Add to cart product for GreenKart @regression @smoke', async ({ page 
   // Scope actions to the specific product card
  
 // Click the + sign (this is the correct selector)
-await cauliflower.locator('a.increment').click();
+  await cauliflower.locator('a.increment').click();
 
   await cauliflower.getByRole('button', { name: 'ADD TO CART' }).click();
   //for Bitroot 
@@ -185,9 +187,37 @@ test.describe('@greenkart @positive', () => {
     // Open cart and checkout
     await cartPage.openCart();
 
-    // Validation (Cart Summary Page)
+    // Validation (Cart Summary Page) 
     const cartProduct = page.locator("td p.product-name");
     await expect(cartProduct).toContainText("Cauliflower");
   });
 
+});
+
+//write a login test for GreenKart application using POM and data driven approach.
+test('Login test for GreenKart application using POM and data driven approach @POM @dataDriven', async ({ page }) => {
+
+  const loginPage = new LoginPage(page);    
+  await page.goto("https://rahulshettyacademy.com/seleniumPractise/#/");
+
+  // Test data for login    
+  const testData = [
+    { username: "validUser", password: "validPass", expected: "Login successful" },
+    { username: "invalidUser", password: "invalidPass", expected: "Invalid credentials" },
+    { username: "", password: "", expected: "Username and password required" }
+  ];                                                                            
+  for (const data of testData) {
+    await loginPage.login(data.username, data.password);
+    const message = await loginPage.getLoginMessage();
+    console.log(`Test with username: ${data.username} - Expected: ${data.expected}, Actual: ${message}`);
+    // Add assert ions based on expected outcomes
+    if (data.expected === "Login successful") {
+      await expect(message).toContain("Welcome");
+    } else {
+      await expect(message).toContain(data.expected);
+    } 
+  }
+  //validation for successful login can be added here (e.g., checking for user profile visibility)
+  await expect(page.locator('.user-profile')).toBeVisible();
+  await page.click('button.logout'); // Logout after tests
 });

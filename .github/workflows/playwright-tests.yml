@@ -32,11 +32,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps ${{ matrix.browser }}
+      - name: Install dependencies and Playwright browsers
+        run: |
+          npm ci
+          npx playwright install --with-deps
       
       - name: Run Playwright tests
         run: npx playwright test --project=${{ matrix.browser }}
@@ -72,11 +71,10 @@ jobs:
           node-version: 18.x
           cache: 'npm'
       
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+      - name: Install dependencies and Playwright browsers
+        run: |
+          npm ci
+          npx playwright install --with-deps
       
       - name: Run smoke tests
         run: npx playwright test --grep @smoke
@@ -105,11 +103,10 @@ jobs:
           node-version: 18.x
           cache: 'npm'
       
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+      - name: Install dependencies and Playwright browsers
+        run: |
+          npm ci
+          npx playwright install --with-deps
       
       - name: Run regression tests
         run: npx playwright test --grep @regression

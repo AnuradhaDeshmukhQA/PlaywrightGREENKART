@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "postinstall": "npx playwright install --with-deps",
     "test:debug": "playwright test --debug",
     "test:headed": "playwright test --headed",
     "test:smoke": "playwright test --grep @smoke",

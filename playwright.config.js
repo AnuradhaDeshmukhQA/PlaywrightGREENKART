@@ -48,7 +48,7 @@ module.exports = defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    // Uncomment to run on Firefox and Safari
+    //Uncomment to run on Firefox and Safari
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
