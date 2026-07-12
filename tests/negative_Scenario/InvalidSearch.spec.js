@@ -111,7 +111,7 @@ test.describe('Search and Product - Negative Scenarios @negativeSce @search', ()
     
     const search = page.getByPlaceholder('Search for Vegetables and Fruits');
     
-    await search.fill('123456789');
+    await search.fill('Cauliflo123456');
     
     // Should return no results
     const products = page.locator('.products .product:visible');

@@ -20,12 +20,20 @@
     "report": "playwright show-report",
     "report:clean": "rm -rf playwright-report test-results && npm test && npm run report"
   },
-  "keywords": ["playwright", "automation", "testing"],
+  "keywords": [
+    "playwright",
+    "automation",
+    "testing"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^24.10.2",
     "cypress": "^15.11.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "openai": "^6.42.0"
   }
 }
