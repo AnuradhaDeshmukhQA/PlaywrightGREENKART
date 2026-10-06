@@ -30,4 +30,4 @@ async function start() {
 }
 
 start();
-console.log("API KEY:", process.env.OPENAI_API_KEY);
+//console.log("API KEY:", process.env.OPENAI_API_KEY);

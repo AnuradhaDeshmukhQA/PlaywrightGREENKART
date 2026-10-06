@@ -3,12 +3,16 @@ const { buffer } = require('stream/consumers');
 
 // Triggering CI pipeline test 
 test ('Add "ZARA COAT 3" to cart and validate @sanity @CIpipeline', async ({ page }) => {
-  const email = "anudesh2010@gmail.com";
+  const email = process.env.GREENKART_EMAIL;
+  const password = process.env.GREENKART_PASSWORD;
+  test.skip(!email || !password, 'Set GREENKART_EMAIL and GREENKART_PASSWORD to run this test.');
+
   const productName = 'ZARA COAT 3';
   const products = page.locator(".card-body");
+
   await page.goto("https://rahulshettyacademy.com/client");
-  await page.locator("#userEmail").fill("anudesh2010@gmail.com");
-  await page.locator("#userPassword").fill("Mahi@8590");
+  await page.locator("#userEmail").fill(email);
+  await page.locator("#userPassword").fill(password);
   await page.locator("[value='Login']").click();
   await page.waitForLoadState('networkidle');
   await page.locator(".card-body b").first().waitFor();

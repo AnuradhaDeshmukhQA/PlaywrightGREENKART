@@ -18,7 +18,9 @@
     "test:webkit": "playwright test --project=webkit",
     "test:single": "playwright test tests/positive_Scenario/GreenKart.spec.js",
     "report": "playwright show-report",
-    "report:clean": "rm -rf playwright-report test-results && npm test && npm run report"
+    "allure:generate": "npx allure generate allure-results --clean -o allure-report",
+    "allure:open": "npx allure open allure-report",
+    "report:clean": "rm -rf playwright-report test-results allure-report && npm test && npm run report"
   },
   "keywords": [
     "playwright",
@@ -27,9 +29,15 @@
   ],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0",
+    "vscode": ">=1.90.0"
+  },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^24.10.2",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.10.2",
     "cypress": "^15.11.0"
   },
   "dependencies": {

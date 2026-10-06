@@ -7,6 +7,7 @@ const isCI = !!process.env.CI;
 
 module.exports = defineConfig({
   testDir: './tests',
+  testMatch: /.*\.(spec|test|setup)\.js$/,
   
   // Timeout settings
   timeout: 30 * 1000,
@@ -18,15 +19,14 @@ module.exports = defineConfig({
   retries: isCI ? 2 : 0, // Retry failed tests 2x in CI
   workers: isCI ? 1 : undefined, // Single worker in CI for stability
   
-  // Reporter configuration
+  // Reporters
   reporter: [
-    ['html', { open: 'never' }],
-    ['json', { outputFile: 'test-results/results.json' }],
-    ['junit', { outputFile: 'test-results/junit.xml' }],
     ['list'],
-    isCI && ['github'],
-  ].filter(Boolean),
-  
+    ['html'],
+    ['json', { outputFile: 'test-results/results.json' }],
+    ['junit', { outputFile: 'test-results/results.xml' }],
+    ['allure-playwright', { outputFolder: 'allure-results' }]
+  ],
   // Global use settings
   use: {
     headless: isCI ? true : false,
@@ -35,7 +35,7 @@ module.exports = defineConfig({
     browserName: 'chromium',
     baseURL: 'https://rahulshettyacademy.com',
     screenshot: isCI ? 'only-on-failure' : 'off',
-    trace: isCI ? 'retain-on-failure' : 'off',
+    trace: isCI ? 'retain-on-failure' : 'on',
     video: isCI ? 'retain-on-failure' : 'off',
     launchOptions: {
       slowMo: isCI ? 0 : 100,

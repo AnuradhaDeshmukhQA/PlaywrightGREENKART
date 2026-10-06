@@ -20,7 +20,7 @@ test.describe('GreenKart application  @negativeSce @regression', () => {
     });
 
 
-   test.only('Search with extremely long input should not crash and show no results', async ({ page }) => {
+   test('Search with extremely long input should not crash and show no results', async ({ page }) => {
     await page.goto(baseURL);
     // Create a long string (~600 chars)
     const longInput = 'x'.repeat(600);
